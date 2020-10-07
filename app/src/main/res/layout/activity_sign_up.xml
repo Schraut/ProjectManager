@@ -18,16 +18,28 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Enter your name, email, and a password"
+            android:gravity="center_vertical"
+            android:text="Go Back"
             android:textColor="@color/primary_text_color"
-            android:textSize="14sp"
-            android:textStyle="bold"/>
+            android:textSize="19sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="16dp" />
 
 
     </androidx.appcompat.widget.Toolbar>
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please sign up with Name and Email"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_sign_up_activity" />
+
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -38,7 +50,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -47,12 +60,11 @@
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/et_name"
-                    android:layout_height="wrap_content"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:hint="name"
                     android:inputType="textPersonName"
-                    android:textSize="16sp"
-                    >
+                    android:textSize="16sp">
 
                 </androidx.appcompat.widget.AppCompatEditText>
             </com.google.android.material.textfield.TextInputLayout>
@@ -63,12 +75,11 @@
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/et_email"
-                    android:layout_height="wrap_content"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:hint="email"
                     android:inputType="textEmailAddress"
-                    android:textSize="16sp"
-                    >
+                    android:textSize="16sp">
 
                 </androidx.appcompat.widget.AppCompatEditText>
             </com.google.android.material.textfield.TextInputLayout>
@@ -79,30 +90,30 @@
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/et_password"
-                    android:layout_height="wrap_content"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:hint="password"
                     android:inputType="textPassword"
-                    android:textSize="16sp"
-                    >
+                    android:textSize="16sp">
 
                 </androidx.appcompat.widget.AppCompatEditText>
 
             </com.google.android.material.textfield.TextInputLayout>
-            
+
             <Button
                 android:id="@+id/btn_sign_up"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/shape_button_rounded"
+                android:gravity="center"
                 android:text="Sign Up"
                 android:textColor="@android:color/white"
-                android:textSize="18sp"
-                android:gravity="center"
-                />
+                android:textSize="18sp" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
