@@ -7,4 +7,7 @@
     <!--    Text colors -->
     <color name="primary_text_color">#363A43</color>
     <color name="secondary_text_color">#7A8089</color>
+
+    <!--    Snack Bar   -->
+    <color name="snackbar_error_color">#F72400</color>
 </resources>

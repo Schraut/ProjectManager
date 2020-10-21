@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "497938985677",
+    "firebase_url": "https://project-manager-8adb3.firebaseio.com",
+    "project_id": "project-manager-8adb3",
+    "storage_bucket": "project-manager-8adb3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:497938985677:android:fd9a1fac2ec9b8a58faf84",
+        "android_client_info": {
+          "package_name": "com.danshrout.projectmanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "497938985677-glstqs8s43revn1oj8ta2b79qpnb4dov.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHA00n_IMOe8bM2Iy_L1cdOytGrYR0lJE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "497938985677-glstqs8s43revn1oj8ta2b79qpnb4dov.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
