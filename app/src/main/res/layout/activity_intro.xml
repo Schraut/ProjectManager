@@ -52,7 +52,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <Button
-        android:id="@+id/btn_sign_in"
+        android:id="@+id/btn_sign_in_screen"
         android:background="@drawable/shape_button_rounded"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_sign_in" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_sign_in_screen" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
