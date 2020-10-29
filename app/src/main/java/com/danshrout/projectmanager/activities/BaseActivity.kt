@@ -48,7 +48,7 @@ open class BaseActivity : AppCompatActivity() {
             return
         }
 
-        // A warning message that the app will close after pressing back twice within 2 seconds
+        // A warning message that the app will close after pressing back twice.
         this.doubleBackToExitPressedOnce = true
         Toast.makeText(
             this,

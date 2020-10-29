@@ -40,40 +40,40 @@ class SignUpActivity : BaseActivity() {
 
     private fun registerUser() {
         // Here we get the text from editText and trim the space
-        val name: String = et_name.text.toString().trim { it <= ' ' }
-        val email: String = et_email.text.toString().trim { it <= ' ' }
-        val password: String = et_password.text.toString().trim { it <= ' ' }
+        val name: String = et_name_sign_up.text.toString().trim { it <= ' ' }
+        val email: String = et_email_sign_up.text.toString().trim { it <= ' ' }
+        val password: String = et_password_sign_up.text.toString().trim { it <= ' ' }
 
-//        if (validateForm(name, email, password)) {
-//            // Show the progress dialog.
-//            showProgressDialog(resources.getString(R.string.please_wait))
-//            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
-//                .addOnCompleteListener(
-//                    OnCompleteListener<AuthResult> { task ->
-//
-//                        // If the registration is successfully done
-//                        if (task.isSuccessful) {
-//
-//                            // Firebase registered user
-//                            val firebaseUser: FirebaseUser = task.result!!.user!!
-//                            // Registered Email
-//                            val registeredEmail = firebaseUser.email!!
-//
-//                            val user = User(
-//                                firebaseUser.uid, name, registeredEmail
-//                            )
-//
-//                            // call the registerUser function of FirestoreClass to make an entry in the database.
-//                            FirestoreClass().registerUser(this@SignUpActivity, user)
-//                        } else {
-//                            Toast.makeText(
-//                                this@SignUpActivity,
-//                                task.exception!!.message,
-//                                Toast.LENGTH_SHORT
-//                            ).show()
-//                        }
-//                    })
-//        }
+        if (validateForm(name, email, password)) {
+            // Show the progress dialog.
+            showProgressDialog(resources.getString(R.string.please_wait))
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    hideProgressDialog()
+
+                    // If the registration is successfully done
+                    if (task.isSuccessful) {
+
+                        // Firebase registered user
+                        val firebaseUser: FirebaseUser = task.result!!.user!!
+                        // Registered Email
+                        val registeredEmail = firebaseUser.email!!
+                        Toast.makeText(
+                            this,
+                            "$name you have " +
+                                    "succesfully registered the email " +
+                                    "address $registeredEmail", Toast.LENGTH_LONG).show()
+                        FirebaseAuth.getInstance().signOut()
+                        finish()
+
+                    } else {
+                        Toast.makeText(this,
+                            "Registration failed dude!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+        }
     }
 
     // Validation form

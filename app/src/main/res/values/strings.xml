@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Project Manager</string>
     <string name="intro_paragraph">Collaborate and plan together as a team.</string>
-    <string name="please_click_back_again_to_exit">Please click back again to exit</string>
+
+
+<!--    Progress Dialog-->
+    <string name="please_click_back_again_to_exit">Please click back again to exit.</string>
+    <string name="please_wait">Please Wait&#8230;</string>
 </resources>
