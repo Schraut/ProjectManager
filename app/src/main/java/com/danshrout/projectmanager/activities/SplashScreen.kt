@@ -6,6 +6,7 @@ import android.os.Handler
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.danshrout.projectmanager.R
+import com.danshrout.projectmanager.firebase.FirestoreClass
 
 class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,8 +20,12 @@ class SplashScreen : AppCompatActivity() {
         )
 
         Handler().postDelayed({
-            val i = Intent(this@SplashScreen, IntroActivity::class.java)
-            startActivity(i)
+            var currentUserID = FirestoreClass().getCurrentUserID()
+            if(currentUserID.isNotEmpty()) {
+                startActivity(Intent(this, MainActivity::class.java))
+            } else {
+                startActivity(Intent(this, IntroActivity::class.java))
+            }
             finish()
         }, 3000)
     }

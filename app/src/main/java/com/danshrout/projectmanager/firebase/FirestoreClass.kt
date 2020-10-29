@@ -1,12 +1,16 @@
 package com.danshrout.projectmanager.firebase
 
 import android.util.Log
+import com.danshrout.projectmanager.activities.SignInActivity
 import com.danshrout.projectmanager.activities.SignUpActivity
 import com.danshrout.projectmanager.models.User
+import com.danshrout.projectmanager.utils.Constants
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 
 class FirestoreClass {
+
     private val mFirestore = FirebaseFirestore.getInstance()
 
 
@@ -30,5 +34,32 @@ class FirestoreClass {
                     e
                 )
             }
+    }
+
+    fun signInUser(activiy: SignInActivity) {
+        mFirestore.collection(Constants.USERS)
+            .document(getCurrentUserID())
+            .get()
+            .addOnSuccessListener { document ->
+                val loggedInUser = document.toObject(User::class.java)
+                if(loggedInUser != null)
+                    activiy.signInSuccess(loggedInUser)
+            }
+            .addOnFailureListener { e ->
+                Log.e(
+                    "SignInUser from FC",
+                    "Error writing document",
+                    e
+                )
+            }
+    }
+
+    fun getCurrentUserID(): String {
+        var currentUser = FirebaseAuth.getInstance().currentUser
+        var currentUserID = ""
+        if(currentUser != null) {
+            currentUserID = currentUser.uid
+        }
+        return currentUserID
     }
 }

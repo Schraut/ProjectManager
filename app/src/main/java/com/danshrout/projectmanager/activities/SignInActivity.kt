@@ -7,6 +7,7 @@ import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
 import com.danshrout.projectmanager.R
+import com.danshrout.projectmanager.models.User
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
@@ -27,6 +28,12 @@ class SignInActivity : BaseActivity() {
         btn_sign_in.setOnClickListener {
             signInRegisteredUser()
         }
+    }
+
+    fun signInSuccess(user: User) {
+        hideProgressDialog()
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 
     // Action bar used for navigating back to the Intro Activity.
