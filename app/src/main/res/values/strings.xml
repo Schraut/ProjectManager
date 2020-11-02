@@ -3,7 +3,14 @@
     <string name="intro_paragraph">Collaborate and plan together as a team.</string>
 
 
-<!--    Progress Dialog-->
+    <!--    Progress Dialog-->
     <string name="please_click_back_again_to_exit">Please click back again to exit.</string>
     <string name="please_wait">Please Wait&#8230;</string>
+
+    <!--    Drawer Profile-->
+    <string name="nav_my_profile">My Profile</string>
+    <string name="nav_sign_out">Sign Out</string>
+
+    <!--    Image-->
+    <string name="image_contentDescription">Image</string>
 </resources>

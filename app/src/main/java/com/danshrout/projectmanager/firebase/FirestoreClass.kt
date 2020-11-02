@@ -1,6 +1,8 @@
 package com.danshrout.projectmanager.firebase
 
+import android.app.Activity
 import android.util.Log
+import com.danshrout.projectmanager.activities.MainActivity
 import com.danshrout.projectmanager.activities.SignInActivity
 import com.danshrout.projectmanager.activities.SignUpActivity
 import com.danshrout.projectmanager.models.User
@@ -36,16 +38,32 @@ class FirestoreClass {
             }
     }
 
-    fun signInUser(activiy: SignInActivity) {
+    fun signInUser(activity: Activity) {
         mFirestore.collection(Constants.USERS)
             .document(getCurrentUserID())
             .get()
             .addOnSuccessListener { document ->
-                val loggedInUser = document.toObject(User::class.java)
-                if(loggedInUser != null)
-                    activiy.signInSuccess(loggedInUser)
+                val loggedInUser = document.toObject(User::class.java)!!
+                when (activity) {
+                    is SignInActivity -> {
+                        activity.signInSuccess(loggedInUser)
+                    }
+                    is MainActivity -> {
+                        activity.updateNavigationUserDetails(loggedInUser)
+                    }
+                }
+
             }
-            .addOnFailureListener { e ->
+            .addOnFailureListener {
+                    e ->
+                when (activity) {
+                    is SignInActivity -> {
+                        activity.hideProgressDialog()
+                    }
+                    is MainActivity -> {
+                        activity.hideProgressDialog()
+                    }
+                }
                 Log.e(
                     "SignInUser from FC",
                     "Error writing document",
