@@ -3,6 +3,7 @@ package com.danshrout.projectmanager.firebase
 import android.app.Activity
 import android.util.Log
 import com.danshrout.projectmanager.activities.MainActivity
+import com.danshrout.projectmanager.activities.MyProfileActivity
 import com.danshrout.projectmanager.activities.SignInActivity
 import com.danshrout.projectmanager.activities.SignUpActivity
 import com.danshrout.projectmanager.models.User
@@ -38,7 +39,7 @@ class FirestoreClass {
             }
     }
 
-    fun signInUser(activity: Activity) {
+    fun loadUserData(activity: Activity) {
         mFirestore.collection(Constants.USERS)
             .document(getCurrentUserID())
             .get()
@@ -51,8 +52,10 @@ class FirestoreClass {
                     is MainActivity -> {
                         activity.updateNavigationUserDetails(loggedInUser)
                     }
+                    is MyProfileActivity -> {
+                        activity.setUserDataInUI(loggedInUser)
+                    }
                 }
-
             }
             .addOnFailureListener {
                     e ->

@@ -1,12 +1,8 @@
 package com.danshrout.projectmanager.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
 import androidx.core.view.GravityCompat
 import com.bumptech.glide.Glide
 import com.danshrout.projectmanager.R
@@ -27,7 +23,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         nav_view.setNavigationItemSelectedListener(this)
 
-        FirestoreClass().signInUser(this)
+        FirestoreClass().loadUserData(this)
     }
 
 
@@ -67,7 +63,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.nav_my_profile -> {
-                Toast.makeText(this@MainActivity, "My Profile clicked", Toast.LENGTH_LONG).show()
+                startActivity(Intent(this@MainActivity, MyProfileActivity::class.java))
             }
 
             R.id.nav_sign_out -> {
