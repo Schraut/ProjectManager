@@ -2,6 +2,7 @@ package com.danshrout.projectmanager.firebase
 
 import android.app.Activity
 import android.util.Log
+import android.widget.Toast
 import com.danshrout.projectmanager.activities.MainActivity
 import com.danshrout.projectmanager.activities.MyProfileActivity
 import com.danshrout.projectmanager.activities.SignInActivity
@@ -82,5 +83,30 @@ class FirestoreClass {
             currentUserID = currentUser.uid
         }
         return currentUserID
+    }
+
+    // A function to update user profile data into the firebase database.
+    fun updateUserProfileData(activity: MyProfileActivity, userHashMap: HashMap<String, Any>) {
+        mFirestore.collection(Constants.USERS) // Collection Name
+            .document(getCurrentUserID()) // Document ID
+            .update(userHashMap) // A hashmap of fields to be updated.
+            .addOnSuccessListener {
+                // Profile data is updated successfully.
+                Log.e(activity.javaClass.simpleName, "Profile Data updated successfully!")
+
+                Toast.makeText(activity, "Profile updated successfully!", Toast.LENGTH_SHORT).show()
+
+                // Notify the success result.
+                activity.profileUpdateSuccess()
+            }
+            .addOnFailureListener { e ->
+                activity.hideProgressDialog()
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while creating a board.",
+                    e
+                )
+                Toast.makeText(activity, "Error updating profile!", Toast.LENGTH_LONG).show()
+            }
     }
 }
