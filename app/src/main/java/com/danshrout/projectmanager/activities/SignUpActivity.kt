@@ -1,13 +1,11 @@
 package com.danshrout.projectmanager.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
 import com.danshrout.projectmanager.R
 import com.danshrout.projectmanager.firebase.FirestoreClass
 import com.danshrout.projectmanager.models.User
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_sign_up.*
@@ -30,17 +28,14 @@ class SignUpActivity : BaseActivity() {
         setSupportActionBar(toolbar_sign_up_activity)
 
         val actionBar = supportActionBar
-        if(actionBar != null) {
+        if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true)
             // This will make a back arrow to navigate back.
             actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_24)
         }
 
         toolbar_sign_up_activity.setNavigationOnClickListener { onBackPressed() }
-
-
     }
-
 
     private fun registerUser() {
         // Here we get the text from editText and trim the space
@@ -64,9 +59,9 @@ class SignUpActivity : BaseActivity() {
                         val user = User(firebaseUser.uid, name, registeredEmail)
 
                         FirestoreClass().registerUser(this, user)
-
                     } else {
-                        Toast.makeText(this,
+                        Toast.makeText(
+                            this,
                             "Registration failed dude!",
                             Toast.LENGTH_SHORT
                         ).show()

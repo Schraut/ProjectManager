@@ -2,6 +2,7 @@
     <string name="app_name">Project Manager</string>
     <string name="intro_paragraph">Collaborate and plan together as a team.</string>
 
+<!--    Intro Activity-->
     <dimen name="intro_screen_title_text_size">40sp</dimen>
     <dimen name="intro_screen_title_text_marginTop">40dp</dimen>
     <dimen name="intro_screen_image_marginTop">30dp</dimen>
