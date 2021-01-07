@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-<!--    Splash screen text size-->
+<!--    Splash screen text size  -->
     <dimen name="splash_screen_text_size">50sp</dimen>
 
-<!--    Forms-->
+<!--    Forms: sign up and sign in  -->
+
+    <dimen name="sign_up_message_text_size">16sp</dimen>
     <dimen name="sign_up_screen_btn_marginTop">30dp</dimen>
     <dimen name="toolbar_title_text_size">18sp</dimen>
     <dimen name="authentication_screen_content_marginTop">40dp</dimen>
@@ -18,7 +20,7 @@
     <dimen name="et_text_size">16sp</dimen>
     <dimen name="authentication_screen_til_marginTop">20dp</dimen>
 
-<!--    Drawer-->
+<!--    Drawer  -->
     <dimen name="height_of_nav_main">200dp</dimen>
     <dimen name="nav_image_size">80dp</dimen>
     <dimen name="nav_content_margin_StartEnd">16dp</dimen>
@@ -28,7 +30,7 @@
     <dimen name="nav_image_circular_border_width">1dp</dimen>
     <dimen name="nav_divider_height">0.5dp</dimen>
 
-<!--    My Profile-->
+<!--    My Profile  -->
     <dimen name="my_profile_screen_content_marginStartEnd">16dp</dimen>
     <dimen name="my_profile_screen_content_marginTopBottom">10dp</dimen>
     <dimen name="my_profile_screen_content_padding">16dp</dimen>
@@ -37,5 +39,10 @@
     <dimen name="my_profile_et_email_marginTop">20dp</dimen>
     <dimen name="my_profile_et_mobile_marginTop">20dp</dimen>
     <dimen name="my_profile_btn_update_marginTop">30dp</dimen>
+
+<!--    Progress Dialog -->
+    <dimen name="progress_dialog_content_padding">10dp</dimen>
+    <dimen name="progress_bar_size">50dp</dimen>
+    <dimen name="progress_text_size">18sp</dimen>
 
 </resources>

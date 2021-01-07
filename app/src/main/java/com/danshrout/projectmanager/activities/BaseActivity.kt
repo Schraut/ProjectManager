@@ -1,10 +1,10 @@
 package com.danshrout.projectmanager.activities
 
 import android.app.Dialog
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.danshrout.projectmanager.R
 import com.google.android.material.snackbar.Snackbar
@@ -55,7 +55,7 @@ open class BaseActivity : AppCompatActivity() {
             resources.getString(R.string.please_click_back_again_to_exit),
             Toast.LENGTH_SHORT
         ).show()
-
+        // If the user hits the back button twice within 2 seconds, the app will close
         Handler().postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
     }
 

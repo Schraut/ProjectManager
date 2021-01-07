@@ -18,14 +18,12 @@ class FirestoreClass {
     private val mFirestore = FirebaseFirestore.getInstance()
 
     fun registerUser(activity: SignUpActivity, userInfo: User) {
-
         mFirestore.collection(Constants.USERS)
             // Document ID for users fields. Here the document is the User ID.
             .document(getCurrentUserID())
-            // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge
+            // Here the userInfo are Field and the SetOption is set to merge. It is for if we want to merge
             .set(userInfo, SetOptions.merge())
             .addOnSuccessListener {
-
                 // Here call a function of base activity for transferring the result to it.
                 activity.userRegisteredSuccess()
             }

@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -82,16 +81,15 @@ class MyProfileActivity : BaseActivity() {
                 updateUserProfileData()
             }
         }
-
     }
 
     // Get the result of the image selection based on the constant code.
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode == Activity.RESULT_OK
-            && requestCode == PICK_IMAGE_REQUEST_CODE
-            && data!!.data != null
+        if (resultCode == Activity.RESULT_OK &&
+            requestCode == PICK_IMAGE_REQUEST_CODE &&
+            data!!.data != null
         ) {
             // The uri of selection image from phone storage.
             mSelectedImageFileUri = data.data
@@ -110,7 +108,6 @@ class MyProfileActivity : BaseActivity() {
         }
     }
 
-
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -118,12 +115,12 @@ class MyProfileActivity : BaseActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == READ_STORAGE_PERMISSION_CODE) {
-            //If permission is granted
+            // If permission is granted
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                 showImageChooser()
             } else {
-                //Display toast if permission is not granted
+                // Display toast if permission is not granted
                 Toast.makeText(
                     this,
                     "Oops, you just denied the permission for storage. You can also allow it from settings.",
@@ -132,7 +129,6 @@ class MyProfileActivity : BaseActivity() {
             }
         }
     }
-
 
     private fun showImageChooser() {
         // An intent for launching the image selection of phone storage.
@@ -158,7 +154,6 @@ class MyProfileActivity : BaseActivity() {
         toolbar_my_profile_activity.setNavigationOnClickListener { onBackPressed() }
     }
 
-
     // Function to set existing details in the UI.
     fun setUserDataInUI(user: User) {
 
@@ -177,7 +172,6 @@ class MyProfileActivity : BaseActivity() {
         }
     }
 
-
     // Function to find out what kind of file the uri is
     private fun getFileExtension(uri: Uri?): String? {
         // MimeTypeMap: Two-way map that maps MIME-types to file extensions and vice versa.
@@ -187,12 +181,10 @@ class MyProfileActivity : BaseActivity() {
         return MimeTypeMap.getSingleton().getExtensionFromMimeType(contentResolver.getType(uri!!))
     }
 
-
     // Show the progress dialog when uploading an image
     private fun uploadUserDialog() {
         showProgressDialog(resources.getString(R.string.please_wait))
     }
-
 
     // Function to upload selected user image to firebase cloud storage.
     private fun uploadUserImage() {
@@ -241,14 +233,12 @@ class MyProfileActivity : BaseActivity() {
         }
     }
 
-
     // Function to notify user that the profile has updated successfully.
     fun profileUpdateSuccess() {
         hideProgressDialog()
         setResult(Activity.RESULT_OK)
         finish()
     }
-
 
     // Function to update the user profile details into the database
     private fun updateUserProfileData() {
@@ -272,7 +262,7 @@ class MyProfileActivity : BaseActivity() {
             changesMade = true
         }
 
-        if(changesMade) // Then update the database
+        if (changesMade) // Then update the database
         // Update the data in the database.
             FirestoreClass().updateUserProfileData(this@MyProfileActivity, userHashMap)
     }

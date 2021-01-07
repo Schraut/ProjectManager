@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.nav_header_main.*
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     companion object {
-        const val MY_PROFILE_REQUEST_CODE : Int = 11
+        const val MY_PROFILE_REQUEST_CODE: Int = 11
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,8 +32,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         FirestoreClass().loadUserData(this)
     }
-
-
+    // This is the hamburger icon
     private fun setupActionBar() {
 
         setSupportActionBar(toolbar_main_activity)
@@ -43,7 +42,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             toggleDrawer()
         }
     }
-
 
     // Function for opening and closing the Navigation Drawer.
     private fun toggleDrawer() {
@@ -67,21 +65,21 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
     }
 
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(resultCode == Activity.RESULT_OK && requestCode == MY_PROFILE_REQUEST_CODE) {
+        if (resultCode == Activity.RESULT_OK && requestCode == MY_PROFILE_REQUEST_CODE) {
             FirestoreClass().loadUserData(this)
         } else {
             Log.e("onActivityResult", "Cancelled man!")
         }
     }
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.nav_my_profile -> {
                 startActivityForResult(
                     Intent(this@MainActivity, MyProfileActivity::class.java),
-                MY_PROFILE_REQUEST_CODE)
+                    MY_PROFILE_REQUEST_CODE
+                )
             }
 
             R.id.nav_sign_out -> {
@@ -108,8 +106,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             .placeholder(R.drawable.ic_user_place_holder) // A default place holder
             .into(nav_user_image) // the view in which the image will be loaded.
 
-
         tv_username.text = user.name
-
     }
 }

@@ -1,7 +1,6 @@
 package com.danshrout.projectmanager.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -10,8 +9,6 @@ import com.danshrout.projectmanager.R
 import com.danshrout.projectmanager.models.User
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_sign_in.*
-import kotlinx.android.synthetic.main.activity_sign_up.*
-import kotlinx.android.synthetic.main.activity_sign_up.toolbar_sign_up_activity
 
 class SignInActivity : BaseActivity() {
 
@@ -41,7 +38,7 @@ class SignInActivity : BaseActivity() {
         setSupportActionBar(toolbar_sign_in_activity)
 
         val actionBar = supportActionBar
-        if(actionBar != null) {
+        if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true)
             // This will make a back arrow to navigate back.
             actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_24)
@@ -67,10 +64,10 @@ class SignInActivity : BaseActivity() {
                         Log.d("Sign in", "signInWithEmail: Success")
                         val user = auth.currentUser
                         startActivity(Intent(this, MainActivity::class.java))
-                    }
-                    else {
+                    } else {
                         Log.w("Sign in", "signInWithEmail: Failed", task.exception)
-                        Toast.makeText(baseContext,
+                        Toast.makeText(
+                            baseContext,
                             "Authentication Failed Dude!",
                             Toast.LENGTH_LONG
                         ).show()
@@ -78,7 +75,6 @@ class SignInActivity : BaseActivity() {
                 }
         }
     }
-
 
     private fun validateForm(email: String, password: String): Boolean {
         return when {
