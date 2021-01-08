@@ -31,6 +31,11 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         nav_view.setNavigationItemSelectedListener(this)
 
         FirestoreClass().loadUserData(this)
+
+        fab_create_board.setOnClickListener{
+            startActivity(Intent(this,
+                CreateBoardActivity::class.java))
+        }
     }
     // This is the hamburger icon
     private fun setupActionBar() {

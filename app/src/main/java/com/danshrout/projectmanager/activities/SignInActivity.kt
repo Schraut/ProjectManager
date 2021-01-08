@@ -62,6 +62,7 @@ class SignInActivity : BaseActivity() {
                     hideProgressDialog()
                     if (task.isSuccessful) {
                         Log.d("Sign in", "signInWithEmail: Success")
+                        // Todo find usage of user variable below
                         val user = auth.currentUser
                         startActivity(Intent(this, MainActivity::class.java))
                     } else {

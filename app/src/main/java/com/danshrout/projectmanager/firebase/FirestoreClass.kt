@@ -86,7 +86,7 @@ class FirestoreClass {
     fun updateUserProfileData(activity: MyProfileActivity, userHashMap: HashMap<String, Any>) {
         mFirestore.collection(Constants.USERS) // Collection Name
             .document(getCurrentUserID()) // Document ID
-            .update(userHashMap) // A hashmap of fields to be updated.
+            .update(userHashMap) // A hashMap of fields to be updated.
             .addOnSuccessListener {
                 // Profile data is updated successfully.
                 Log.e(activity.javaClass.simpleName, "Profile Data updated successfully!")
