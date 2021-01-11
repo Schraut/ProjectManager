@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.danshrout.projectmanager.R
 import com.danshrout.projectmanager.firebase.FirestoreClass
 import com.danshrout.projectmanager.models.User
+import com.danshrout.projectmanager.utils.Constants
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
@@ -22,6 +23,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         const val MY_PROFILE_REQUEST_CODE: Int = 11
     }
 
+    private lateinit var mUserName: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -32,9 +35,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         FirestoreClass().loadUserData(this)
 
-        fab_create_board.setOnClickListener{
-            startActivity(Intent(this,
-                CreateBoardActivity::class.java))
+        fab_create_board.setOnClickListener {
+            val intent = Intent(this, CreateBoardActivity::class.java)
+            intent.putExtra(Constants.NAME, mUserName)
+            startActivity(intent)
         }
     }
     // This is the hamburger icon
@@ -104,6 +108,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
     // Function to get the current user details from firebase.
     fun updateNavigationUserDetails(user: User) {
+
+        mUserName = user.name
+
         Glide
             .with(this@MainActivity)
             .load(user.image) // URL of the image

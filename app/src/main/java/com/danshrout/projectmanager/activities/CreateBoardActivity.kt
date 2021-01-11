@@ -20,9 +20,15 @@ class CreateBoardActivity : AppCompatActivity() {
 
     private var mSelectedImageFileUri: Uri? = null
 
+    private lateinit var mUserName: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_board)
+
+        if (intent.hasExtra(Constants.NAME)) {
+            mUserName = intent.getStringExtra(Constants.NAME)
+        }
 
         setupActionBar()
         // Checking for permission then open image chooser then request permission if it's not selected
