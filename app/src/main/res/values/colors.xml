@@ -10,4 +10,7 @@
 
     <!--    Snack Bar   -->
     <color name="snackbar_error_color">#F72400</color>
+
+<!--    Divider for main content    -->
+    <color name="divider_color">#EAEAEA</color>
 </resources>

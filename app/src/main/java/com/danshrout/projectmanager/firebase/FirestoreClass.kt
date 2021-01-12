@@ -3,10 +3,8 @@ package com.danshrout.projectmanager.firebase
 import android.app.Activity
 import android.util.Log
 import android.widget.Toast
-import com.danshrout.projectmanager.activities.MainActivity
-import com.danshrout.projectmanager.activities.MyProfileActivity
-import com.danshrout.projectmanager.activities.SignInActivity
-import com.danshrout.projectmanager.activities.SignUpActivity
+import com.danshrout.projectmanager.activities.*
+import com.danshrout.projectmanager.models.Board
 import com.danshrout.projectmanager.models.User
 import com.danshrout.projectmanager.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
@@ -37,7 +35,7 @@ class FirestoreClass {
             }
     }
 
-    fun loadUserData(activity: Activity) {
+    fun loadUserData(activity: Activity, readBoardList: Boolean = false) {
         mFirestore.collection(Constants.USERS)
             .document(getCurrentUserID())
             .get()
@@ -48,7 +46,7 @@ class FirestoreClass {
                         activity.signInSuccess(loggedInUser)
                     }
                     is MainActivity -> {
-                        activity.updateNavigationUserDetails(loggedInUser)
+                        activity.updateNavigationUserDetails(loggedInUser, readBoardList)
                     }
                     is MyProfileActivity -> {
                         activity.setUserDataInUI(loggedInUser)
@@ -104,6 +102,56 @@ class FirestoreClass {
                     e
                 )
                 Toast.makeText(activity, "Error updating profile!", Toast.LENGTH_LONG).show()
+            }
+    }
+
+    fun createBoard(activity: CreateBoardActivity, board: Board) {
+        mFirestore.collection(Constants.BOARDS)
+            .document()
+            .set(board, SetOptions.merge())
+            .addOnSuccessListener {
+                Log.e(activity.javaClass.simpleName, "Board created successfully")
+                Toast.makeText(activity, "Board created successfully", Toast.LENGTH_LONG).show()
+                activity.boardCreated()
+            }.addOnFailureListener {
+                exception ->
+                activity.hideProgressDialog()
+                Log.e(activity.javaClass.simpleName, "Board not created :(", exception)
+            }
+    }
+
+    fun getBoardsList(activity: MainActivity) {
+        mFirestore.collection(Constants.BOARDS)
+            .whereArrayContains(Constants.ASSIGNED_TO, getCurrentUserID())
+            .get()
+            .addOnSuccessListener {
+                document ->
+                Log.i(activity.javaClass.simpleName, document.documents.toString())
+                val boardList: ArrayList<Board> = ArrayList()
+                for (i in document.documents) {
+                    val board = i.toObject(Board::class.java)!!
+                    board.documentId = i.id
+                    boardList.add(board)
+                }
+
+                activity.populateBoardsList(boardList)
+            }.addOnFailureListener { e ->
+                activity.hideProgressDialog()
+                Log.e(activity.javaClass.simpleName, "Error creating board", e)
+            }
+    }
+
+    fun getBoardDetails(activity: TaskListActivity, documentId: String) {
+        mFirestore.collection(Constants.BOARDS)
+            .document(documentId)
+            .get()
+            .addOnSuccessListener {
+                document ->
+                Log.i(activity.javaClass.simpleName, document.toString())
+                activity.boardDetails(document.toObject(Board::class.java)!!)
+            }.addOnFailureListener { e ->
+                activity.hideProgressDialog()
+                Log.e(activity.javaClass.simpleName, "Error creating board", e)
             }
     }
 }
