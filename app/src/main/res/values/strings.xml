@@ -2,7 +2,7 @@
     <string name="app_name">Project Manager</string>
     <string name="intro_paragraph">Collaborate and plan together as a team.</string>
 
-    <!--    Intro Activity  -->
+<!--    Intro Activity    -->
     <dimen name="intro_screen_title_text_size">40sp</dimen>
     <dimen name="intro_screen_title_text_marginTop">40dp</dimen>
     <dimen name="intro_screen_image_marginTop">30dp</dimen>
@@ -18,7 +18,7 @@
     <dimen name="intro_screen_sign_up_btn_marginTop">15dp</dimen>
     <dimen name="btn_text_size">18sp</dimen>
 
-    <!--    Forms: Sing In and Sign Up  -->
+<!--    Forms: Sing In and Sign Up    -->
     <string name="go_back">Go Back</string>
     <string name="please_enter_name_email">Please enter your name and email to sign in.</string>
     <string name="sign_up_description_text">Enter your name, email id and password, to register with us.</string>
@@ -26,25 +26,35 @@
     <string name="password">Password</string>
     <string name="email">Email</string>
 
-    <!--    Progress Dialog  -->
+<!--    Progress Dialog    -->
     <string name="please_click_back_again_to_exit">Please click back again to exit.</string>
     <string name="please_wait">Please Wait&#8230;</string>
 
-    <!--    Drawer Profile  -->
+<!--    Drawer Profile    -->
     <string name="nav_my_profile">My Profile</string>
     <string name="nav_sign_out">Sign Out</string>
 
-    <!--    Image  -->
+<!--    Image    -->
     <string name="image_contentDescription">Image</string>
 
-    <!--    My Profile  -->
+<!--    My Profile    -->
     <string name="mobile">Mobile</string>
     <string name="update">UPDATE</string>
     <string name="my_profile_title">My Profile</string>
 
-    <!--    Boards  -->
+<!--    Boards    -->
     <string name="create_board_title">Create Board</string>
     <string name="create">CREATE</string>
     <string name="board_name">Board Name</string>
     <string name="no_boards_are_available">No boards available</string>
+
+<!--    Task list   -->
+    <string name="action_add_list">Add List</string>
+    <string name="hint_list_name">List Name</string>
+    <string name="action_add_card">Add Card</string>
+    <string name="hint_card_name">Card Name</string>
+    <string name="add_list">Add List</string>
+
+<!--    Members    -->
+    <string name="members">Members</string>
 </resources>

@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.Toast
 import com.danshrout.projectmanager.activities.*
 import com.danshrout.projectmanager.models.Board
+import com.danshrout.projectmanager.models.Task
 import com.danshrout.projectmanager.models.User
 import com.danshrout.projectmanager.utils.Constants
 import com.google.firebase.auth.FirebaseAuth
@@ -148,10 +149,33 @@ class FirestoreClass {
             .addOnSuccessListener {
                 document ->
                 Log.i(activity.javaClass.simpleName, document.toString())
-                activity.boardDetails(document.toObject(Board::class.java)!!)
+
+                val board = document.toObject(Board::class.java)!!
+                board.documentId = document.id
+                activity.boardDetails(board)
             }.addOnFailureListener { e ->
                 activity.hideProgressDialog()
                 Log.e(activity.javaClass.simpleName, "Error creating board", e)
+            }
+    }
+
+    // Create a task list in the board detail.
+    fun addUpdateTaskList(activity: TaskListActivity, board: Board) {
+
+        val taskListHashMap = HashMap<String, Any>()
+        taskListHashMap[Constants.TASK_LIST] = board.taskList
+
+        mFirestore.collection(Constants.BOARDS)
+            .document(board.documentId)
+            .update(taskListHashMap)
+            .addOnSuccessListener {
+                Log.e(activity.javaClass.simpleName, "TaskList updated successfully.")
+
+                activity.addUpdateTaskListSuccess()
+            }
+            .addOnFailureListener { e ->
+                activity.hideProgressDialog()
+                Log.e(activity.javaClass.simpleName, "Error while creating a board.", e)
             }
     }
 }
