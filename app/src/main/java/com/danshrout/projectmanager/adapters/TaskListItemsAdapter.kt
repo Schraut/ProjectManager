@@ -34,14 +34,6 @@ open class TaskListItemsAdapter(
         return MyViewHolder(view)
     }
 
-    /**
-     * Called when RecyclerView needs a new {@link ViewHolder} of the given type to represent
-     * an item.
-     *
-     * This new ViewHolder should be constructed with a new View that can represent the items
-     * of the given type. You can either create a new View manually or inflate it from an XML
-     * layout file.
-     */
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val model = list[position]
 
@@ -134,6 +126,15 @@ open class TaskListItemsAdapter(
 
             val adapter = CardListItemsAdapter(context, model.cards)
             holder.itemView.rv_card_list.adapter = adapter
+            // Adds a click event on card items for card details.
+            adapter.setOnClickListener(object :
+                    CardListItemsAdapter.OnClickListener {
+                    override fun onClick(cardPosition: Int) {
+                        if (context is TaskListActivity) {
+                            context.cardDetails(position, cardPosition)
+                        }
+                    }
+                })
         }
     }
 
@@ -146,9 +147,7 @@ open class TaskListItemsAdapter(
     private fun Int.toDp(): Int =
         (this / Resources.getSystem().displayMetrics.density).toInt()
 
-    /**
-     * A function to get pixel from density pixel
-     */
+    // Get pixel from density pixel
     private fun Int.toPx(): Int =
         (this * Resources.getSystem().displayMetrics.density).toInt()
 
@@ -179,8 +178,5 @@ open class TaskListItemsAdapter(
         alertDialog.show() // show the dialog to UI
     }
 
-    /**
-     * A ViewHolder describes an item view and metadata about its place within the RecyclerView.
-     */
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view)
 }
