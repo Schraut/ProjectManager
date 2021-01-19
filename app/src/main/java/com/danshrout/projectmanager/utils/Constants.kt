@@ -26,6 +26,19 @@ object Constants {
     // Unique code for asking the Read Storage Permission. Check and identify
     const val READ_STORAGE_PERMISSION_CODE = 1
     const val PICK_IMAGE_REQUEST_CODE = 2
+    // Notifications
+    const val PROJECT_MANAGER_PREFERENCES = "project_manager_preferences"
+    const val FCM_TOKEN_UPDATED = "fcmTokenUpdated"
+    const val FCM_TOKEN = "fcmToken"
+    // Base url and key params for sending firebase notification.
+    const val FCM_BASE_URL: String = "https://fcm.googleapis.com/fcm/send"
+    const val FCM_AUTHORIZATION: String = "authorization"
+    const val FCM_KEY: String = "key"
+    const val FCM_SERVER_KEY: String = "AAAAc-958s0:APA91bGJT_BVk8l6ydTw_kAA8QKBIrGDS4aliOUCHpmXdzSqSgY5Zy7AFCPIAGFOKRJC_aQBT9CSI9za0YMNXmRjp8qL9E7lES8dgzXFx-cUYVKI1eVZw4ArM8tcwsniZU3CnuJhW9Pf"
+    const val FCM_KEY_TITLE: String = "title"
+    const val FCM_KEY_MESSAGE: String = "message"
+    const val FCM_KEY_DATA: String = "data"
+    const val FCM_KEY_TO: String = "to"
 
     fun showImageChooser(activity: Activity) {
         // An intent for launching the image selection of phone storage.

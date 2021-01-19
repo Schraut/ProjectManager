@@ -85,4 +85,7 @@
 <!--    Select member    -->
     <string name="str_select_member">Select Member</string>
 
+<!--    Notifications   -->
+    <string name="default_notification_channel_id">project_manager_notification_channel_id</string>
+
 </resources>

@@ -81,27 +81,38 @@ class FirestoreClass {
     }
 
     // A function to update user profile data into the firebase database.
-    fun updateUserProfileData(activity: MyProfileActivity, userHashMap: HashMap<String, Any>) {
+    fun updateUserProfileData(activity: Activity, userHashMap: HashMap<String, Any>) {
         mFirestore.collection(Constants.USERS) // Collection Name
             .document(getCurrentUserID()) // Document ID
             .update(userHashMap) // A hashMap of fields to be updated.
             .addOnSuccessListener {
                 // Profile data is updated successfully.
-                Log.e(activity.javaClass.simpleName, "Profile Data updated successfully!")
-
-                Toast.makeText(activity, "Profile updated successfully!", Toast.LENGTH_SHORT).show()
-
+                Log.e(activity.javaClass.simpleName, "Profile updated successfully!")
                 // Notify the success result.
-                activity.profileUpdateSuccess()
+                when (activity) {
+                    is MainActivity -> {
+                        activity.tokenUpdateSuccess()
+                    }
+                    is MyProfileActivity -> {
+                        activity.profileUpdateSuccess()
+                    }
+                }
             }
             .addOnFailureListener { e ->
-                activity.hideProgressDialog()
+                when (activity) {
+                    is MainActivity -> {
+                        activity.hideProgressDialog()
+                    }
+                    is MyProfileActivity -> {
+                        activity.hideProgressDialog()
+                    }
+                }
+
                 Log.e(
                     activity.javaClass.simpleName,
                     "Error while creating a board.",
                     e
                 )
-                Toast.makeText(activity, "Error updating profile!", Toast.LENGTH_LONG).show()
             }
     }
 
@@ -220,7 +231,7 @@ class FirestoreClass {
     }
 
     // Get the user details from Firestore Database using the email address.
-    fun getMemberDetails(activity: Activity, email: String) {
+    fun getMemberDetails(activity: MembersActivity, email: String) {
         // Here we pass the collection name from which we wants the data.
         mFirestore.collection(Constants.USERS)
             // A where array query as we want the list of the board in which the user is assigned. So here you can pass the current user id.
@@ -228,27 +239,18 @@ class FirestoreClass {
             .get()
             .addOnSuccessListener { document ->
                 Log.e(activity.javaClass.simpleName, document.documents.toString())
-                val usersList: ArrayList<User> = ArrayList()
 
-                for (i in document.documents) {
-                    // Convert all the document snapshot to the object using the data model class.
-                    val user = i.toObject(User::class.java)!!
-                    usersList.add(user)
-                }
-
-                if (activity is MembersActivity) {
-                    activity.setupMembersList(usersList)
-                } else if (activity is TaskListActivity) {
-                    activity.boardMembersDetailList(usersList)
+                if (document.documents.size > 0) {
+                    val user = document.documents[0].toObject(User::class.java)!!
+                    // Here call a function of base activity for transferring the result to it.
+                    activity.memberDetails(user)
+                } else {
+                    activity.hideProgressDialog()
+                    activity.showErrorSnackBar("No such member found.")
                 }
             }
             .addOnFailureListener { e ->
-                if (activity is MembersActivity) {
-                    activity.hideProgressDialog()
-                } else if (activity is TaskListActivity) {
-                    activity.hideProgressDialog()
-                }
-
+                activity.hideProgressDialog()
                 Log.e(
                     activity.javaClass.simpleName,
                     "Error while creating a board.",

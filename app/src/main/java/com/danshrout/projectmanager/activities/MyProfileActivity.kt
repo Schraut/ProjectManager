@@ -5,9 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
-import android.webkit.MimeTypeMap
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -20,7 +18,6 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.activity_my_profile.*
 import java.io.IOException
-import java.util.jar.Manifest
 
 class MyProfileActivity : BaseActivity() {
     // Global variable for URI of a selected image from phone storage.
@@ -36,14 +33,14 @@ class MyProfileActivity : BaseActivity() {
 
         setupActionBar()
 
-        FirestoreClass().loadUserData(this)
+        FirestoreClass().loadUserData(this@MyProfileActivity)
 
         iv_profile_user_image.setOnClickListener {
 
             if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
                 == PackageManager.PERMISSION_GRANTED
             ) {
-                Constants.showImageChooser(this)
+                Constants.showImageChooser(this@MyProfileActivity)
             } else {
                 /*Requests permissions to be granted to this application. These permissions
                  must be requested in your manifest, they should not be granted to your app,
@@ -76,7 +73,7 @@ class MyProfileActivity : BaseActivity() {
             data!!.data != null
         ) {
             // The uri of selection image from phone storage.
-            mSelectedImageFileUri = data.data
+            mSelectedImageFileUri = data.data!!
 
             try {
                 // Load the user image in the ImageView.
@@ -102,7 +99,7 @@ class MyProfileActivity : BaseActivity() {
             // If permission is granted
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                Constants.showImageChooser(this)
+                Constants.showImageChooser(this@MyProfileActivity)
             } else {
                 // Display toast if permission is not granted
                 Toast.makeText(
@@ -146,11 +143,6 @@ class MyProfileActivity : BaseActivity() {
         }
     }
 
-    // Show the progress dialog when uploading an image
-    private fun uploadUserDialog() {
-        showProgressDialog(resources.getString(R.string.please_wait))
-    }
-
     // Function to upload selected user image to firebase cloud storage.
     private fun uploadUserImage() {
 
@@ -161,7 +153,7 @@ class MyProfileActivity : BaseActivity() {
             // Get storage reference
             val sRef: StorageReference = FirebaseStorage.getInstance().reference.child(
                 "USER_IMAGE" + System.currentTimeMillis() + "." + Constants.getFileExtension(
-                    this, mSelectedImageFileUri
+                    this@MyProfileActivity, mSelectedImageFileUri
                 )
             )
 
@@ -198,37 +190,54 @@ class MyProfileActivity : BaseActivity() {
         }
     }
 
-    // Function to notify user that the profile has updated successfully.
-    fun profileUpdateSuccess() {
-        hideProgressDialog()
-        setResult(Activity.RESULT_OK)
-        finish()
-    }
-
     // Function to update the user profile details into the database
     private fun updateUserProfileData() {
-
         val userHashMap = HashMap<String, Any>()
-
-        var changesMade = false
 
         if (mProfileImageURL.isNotEmpty() && mProfileImageURL != mUserDetails.image) {
             userHashMap[Constants.IMAGE] = mProfileImageURL
-            changesMade = true
         }
 
         if (et_name.text.toString() != mUserDetails.name) {
             userHashMap[Constants.NAME] = et_name.text.toString()
-            changesMade = true
         }
 
         if (et_mobile.text.toString() != mUserDetails.mobile.toString()) {
             userHashMap[Constants.MOBILE] = et_mobile.text.toString().toLong()
-            changesMade = true
         }
 
-        if (changesMade) // Then update the database
         // Update the data in the database.
-            FirestoreClass().updateUserProfileData(this@MyProfileActivity, userHashMap)
+        FirestoreClass().updateUserProfileData(this@MyProfileActivity, userHashMap)
+
+//        val userHashMap = HashMap<String, Any>()
+//
+//        var changesMade = false
+//
+//        if (mProfileImageURL.isNotEmpty() && mProfileImageURL != mUserDetails.image) {
+//            userHashMap[Constants.IMAGE] = mProfileImageURL
+//            changesMade = true
+//        }
+//
+//        if (et_name.text.toString() != mUserDetails.name) {
+//            userHashMap[Constants.NAME] = et_name.text.toString()
+//            changesMade = true
+//        }
+//
+//        if (et_mobile.text.toString() != mUserDetails.mobile.toString()) {
+//            userHashMap[Constants.MOBILE] = et_mobile.text.toString().toLong()
+//            changesMade = true
+//        }
+//
+//        if (changesMade) // Then update the database
+//        // Update the data in the database.
+//            FirestoreClass().updateUserProfileData(this@MyProfileActivity, userHashMap)
+    }
+
+    // Function to notify user that the profile has updated successfully.
+    fun profileUpdateSuccess() {
+        hideProgressDialog()
+        setResult(Activity.RESULT_OK)
+        Toast.makeText(this@MyProfileActivity, "Profile updated successfully!", Toast.LENGTH_SHORT).show()
+        finish()
     }
 }

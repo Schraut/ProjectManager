@@ -1,7 +1,9 @@
 package com.danshrout.projectmanager.activities
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -17,6 +19,7 @@ import com.danshrout.projectmanager.models.User
 import com.danshrout.projectmanager.utils.Constants
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.main_content.*
@@ -24,12 +27,9 @@ import kotlinx.android.synthetic.main.nav_header_main.*
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    companion object {
-        const val MY_PROFILE_REQUEST_CODE: Int = 11
-        const val CREATE_BOARD_REQUEST_CODE: Int = 12
-    }
-
     private lateinit var mUserName: String
+    // SharedPreferences
+    private lateinit var mSharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +39,24 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         nav_view.setNavigationItemSelectedListener(this)
 
-        FirestoreClass().loadUserData(this, true)
+        mSharedPreferences = this.getSharedPreferences(
+            Constants.PROJECT_MANAGER_PREFERENCES, Context.MODE_PRIVATE
+        )
+
+        // Gets the FCM token and updates it in the database.
+        // Variable used get the value either token is updated or not in the database.
+        val tokenUpdated = mSharedPreferences.getBoolean(Constants.FCM_TOKEN_UPDATED, false)
+        // If the token is already updated than no need to update it every time.
+        if (tokenUpdated) {
+            // Get the current logged in user details.
+            showProgressDialog(resources.getString(R.string.please_wait))
+            FirestoreClass().loadUserData(this@MainActivity, true)
+        } else {
+            FirebaseInstanceId.getInstance()
+                .instanceId.addOnSuccessListener(this@MainActivity) { instanceIdResult ->
+                    updateFCMToken(instanceIdResult.token)
+                }
+        }
 
         fab_create_board.setOnClickListener {
             val intent = Intent(this, CreateBoardActivity::class.java)
@@ -125,7 +142,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             R.id.nav_sign_out -> {
                 // Sign out user from firebase.
                 FirebaseAuth.getInstance().signOut()
-
+                // Clears the shared preferences when the user signs out.
+                mSharedPreferences.edit().clear().apply()
                 // Send the user to the intro screen of the application.
                 val intent = Intent(this, IntroActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -139,7 +157,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
     // Function to get the current user details from firebase.
     fun updateNavigationUserDetails(user: User, readBoardsList: Boolean) {
-
+        hideProgressDialog()
         mUserName = user.name
 
         Glide
@@ -155,5 +173,32 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             showProgressDialog(resources.getString(R.string.please_wait))
             FirestoreClass().getBoardsList(this)
         }
+    }
+
+    // Notifies the token is updated successfully in the database.
+    fun tokenUpdateSuccess() {
+        hideProgressDialog()
+        // Here we have added a another value in shared preference that the token is updated in the database successfully.
+        // So we don't need to update it every time.
+        val editor: SharedPreferences.Editor = mSharedPreferences.edit()
+        editor.putBoolean(Constants.FCM_TOKEN_UPDATED, true)
+        editor.apply()
+        // Get the current logged in user details.
+        showProgressDialog(resources.getString(R.string.please_wait))
+        FirestoreClass().loadUserData(this@MainActivity, true)
+    }
+
+    // Updates the user's FCM token into the database.
+    private fun updateFCMToken(token: String) {
+        val userHashMap = HashMap<String, Any>()
+        userHashMap[Constants.FCM_TOKEN] = token
+        // Update the data in the database.
+        showProgressDialog(resources.getString(R.string.please_wait))
+        FirestoreClass().updateUserProfileData(this@MainActivity, userHashMap)
+    }
+
+    companion object {
+        const val MY_PROFILE_REQUEST_CODE: Int = 11
+        const val CREATE_BOARD_REQUEST_CODE: Int = 12
     }
 }
