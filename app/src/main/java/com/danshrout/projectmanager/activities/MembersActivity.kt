@@ -8,7 +8,6 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.danshrout.projectmanager.R
 import com.danshrout.projectmanager.adapters.MemberListItemsAdapter
@@ -168,6 +167,7 @@ class MembersActivity : BaseActivity() {
          */
         override fun doInBackground(vararg params: Any): String {
             var result: String
+            var fcm_server_key = getString(R.string.FCM_SERVER_KEY)
             /**
              * https://developer.android.com/reference/java/net/HttpURLConnection
              *
@@ -213,7 +213,7 @@ class MembersActivity : BaseActivity() {
                 // 5. Finally, the SerkeyKey.
                 // For Detail understanding visit the link: https://android.jlelse.eu/android-push-notification-using-firebase-and-advanced-rest-client-3858daff2f50
                 connection.setRequestProperty(
-                    Constants.FCM_AUTHORIZATION, "${Constants.FCM_KEY}=${Constants.FCM_SERVER_KEY}"
+                    Constants.FCM_AUTHORIZATION, "${Constants.FCM_KEY}=$fcm_server_key"
                 )
                 /**
                  * Some protocols do caching of documents.  Occasionally, it is important
