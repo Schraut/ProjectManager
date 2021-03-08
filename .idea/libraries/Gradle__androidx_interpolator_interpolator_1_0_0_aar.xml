@@ -4,10 +4,15 @@
       <root url="file://$USER_HOME$/AndroidStudioProjects/MyApplication/app/caches/transforms-2/files-2.1/b8ce3ba068b577e104c145c56381ab59/interpolator-1.0.0/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/AndroidStudioProjects/MyApplication/app/caches/transforms-2/files-2.1/b8ce3ba068b577e104c145c56381ab59/interpolator-1.0.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/AndroidStudioProjects/MyApplication/app/caches/transforms-2/files-2.1/b8ce3ba068b577e104c145c56381ab59/interpolator-1.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b8ce3ba068b577e104c145c56381ab59/interpolator-1.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c35e41e0663a53526b01678f9217e4df/interpolator-1.0.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c35e41e0663a53526b01678f9217e4df/interpolator-1.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c35e41e0663a53526b01678f9217e4df/interpolator-1.0.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="jar://$USER_HOME$/AndroidStudioProjects/MyApplication/app/caches/modules-2/files-2.1/androidx.interpolator/interpolator/1.0.0/fefd5e3cbc479b6b4a9532d05688a1e659e8d3d2/interpolator-1.0.0-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.interpolator/interpolator/1.0.0/fefd5e3cbc479b6b4a9532d05688a1e659e8d3d2/interpolator-1.0.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

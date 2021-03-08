@@ -22,7 +22,7 @@ import java.io.IOException
 class MyProfileActivity : BaseActivity() {
     // Global variable for URI of a selected image from phone storage.
     private var mSelectedImageFileUri: Uri? = null
-
+    // Global variable for user details.
     private lateinit var mUserDetails: User
     // Global variable for user profile image URL
     private var mProfileImageURL: String = ""

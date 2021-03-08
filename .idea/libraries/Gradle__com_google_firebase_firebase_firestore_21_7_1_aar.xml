@@ -4,12 +4,18 @@
       <root url="jar://$USER_HOME$/AndroidStudioProjects/MyApplication/app/caches/transforms-2/files-2.1/d912a9f855136702f289bd051f6e5cbe/jetified-firebase-firestore-21.7.1/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/AndroidStudioProjects/MyApplication/app/caches/transforms-2/files-2.1/d912a9f855136702f289bd051f6e5cbe/jetified-firebase-firestore-21.7.1/res" />
       <root url="file://$USER_HOME$/AndroidStudioProjects/MyApplication/app/caches/transforms-2/files-2.1/d912a9f855136702f289bd051f6e5cbe/jetified-firebase-firestore-21.7.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d912a9f855136702f289bd051f6e5cbe/jetified-firebase-firestore-21.7.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b7df1938aae578cdb02b9b2c0e3aac87/jetified-firebase-firestore-21.7.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b7df1938aae578cdb02b9b2c0e3aac87/jetified-firebase-firestore-21.7.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b7df1938aae578cdb02b9b2c0e3aac87/jetified-firebase-firestore-21.7.1/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/AndroidStudioProjects/MyApplication/app/caches/modules-2/files-2.1/com.google.firebase/firebase-firestore/21.7.1/bd602b8c29c3813f4d0342b9847e24a68e96bd49/firebase-firestore-21.7.1-javadoc.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-firestore/21.7.1/bd602b8c29c3813f4d0342b9847e24a68e96bd49/firebase-firestore-21.7.1-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
       <root url="jar://$USER_HOME$/AndroidStudioProjects/MyApplication/app/caches/modules-2/files-2.1/com.google.firebase/firebase-firestore/21.7.1/ce45ed5c48a534cd80413976d3c9b1f9551ac4d9/firebase-firestore-21.7.1-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-firestore/21.7.1/ce45ed5c48a534cd80413976d3c9b1f9551ac4d9/firebase-firestore-21.7.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
