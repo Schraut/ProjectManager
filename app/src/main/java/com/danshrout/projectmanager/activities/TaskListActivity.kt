@@ -55,6 +55,7 @@ class TaskListActivity : BaseActivity() {
     // Inflates the action menu for TaskListScreen and also launches the MembersActivity Screen on item selection
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         // Inflate the menu to use in the action bar
+
         menuInflater.inflate(R.menu.menu_members, menu)
         return super.onCreateOptionsMenu(menu)
     }
